@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chenyc.example.dao.TeacherDao">
+
+    <insert id="addTeacher" parameterType="com.alibaba.fastjson.JSONObject">
+        INSERT INTO teacher
+          (name, phone, birth, sex, first_degree, major, title)
+          VALUES(#{name},#{phone}, #{birth}, #{sex}, #{firstDegree}, #{major}, #{title});
+    </insert>
+
+    <select id="countTeacher" resultType="Integer">
+        SELECT count(1)
+        FROM teacher w
+        WHERE w.delete_status = '1'
+    </select>
+
+    <select id="listTeacher" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT
+            w.id id,
+            w.`name`,
+            phone,
+            birth,
+            round(DATEDIFF(now(), str_to_date(birth,'%Y-%m-%d'))/365)  age,
+            sex,
+            first_degree firstDegree,
+            major,
+            title,
+            date_format(w.create_time, '%Y.%m.%d %T') createTime,
+            date_format(w.update_time, '%Y.%m.%d %T') updateTime
+        FROM teacher w
+        WHERE w.delete_status = '1'
+        ORDER BY updateTime DESC
+        LIMIT #{offSet}, #{pageRow}
+    </select>
+
+    <update id="updateTeacher" parameterType="com.alibaba.fastjson.JSONObject">
+        UPDATE teacher
+        SET
+            `name` = #{name},
+            phone = #{phone},
+            birth = #{birth},
+            sex = #{sex},
+            first_degree = #{firstDegree},
+            major = #{major},
+            title = #{title},
+            update_time = current_timestamp
+        WHERE id = #{id}
+    </update>
+
+</mapper>
