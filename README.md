@@ -19,3 +19,10 @@ npm install
 npm run dev
 
 前端端口是9520, 前端启动会自动访问登录页.
+
+## 权限说明:
+项目运行起来之后自己看看代码是怎么跑的;
+sys_permission里面配置了各种菜单权限,按钮权限;
+sys_role 配置角色
+sys_role_permission 配置角色权限关系;
+sys_user_role 配置用户角色关联;
