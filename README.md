@@ -12,6 +12,7 @@
 后端:
 1. 打开自己的mysql, 创建example数据库, 然后全选执行db.sql; 
 2. 找到application-local.yml/application-prod.yml 修改datasource, 修改完毕后端就可以启动了,默认端口是8080,要是改了前端记得同步修改
+
 前端: 
 1. 我一般用vscode开前端项目, 如果你没有改端口, 在node.js安装好之后;
 npm install
